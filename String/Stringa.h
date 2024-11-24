@@ -10,5 +10,7 @@ class Stringa
 		Stringa(char* array);
 		Stringa(char* array);
 		Stringa(const Stringa &str);
+		void Show() const; 
+		size_t getLength() const;
 };
 

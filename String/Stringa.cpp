@@ -18,3 +18,10 @@ Stringa::Stringa(const Stringa &str)
 {
 	this->dynamicText = str.dynamicText;
 }
+
+void Stringa::Show() const{
+	std::cout << dynamicText << std::endl;
+}
+size_t Stringa::getLength() const {
+	return this->lenth;
+}

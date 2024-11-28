@@ -3,25 +3,33 @@
 #include<cstring>
 
 Stringa::Stringa() {
-	this->lenth = 80;
+	lenth = 80;
+	dynamicText = new char[lenth + 1];
+	dynamicText[0] = '\0';
 }
 
 Stringa::Stringa(size_t _lenth) {
-	this->lenth = lenth;
+	lenth = _lenth;
+	dynamicText = new char[lenth + 1];
+	dynamicText[0] = '\0';
 }
 
-Stringa::Stringa(char* array) {
-	this->dynamicText = array;
+Stringa::Stringa(const char* array) {
+	lenth = strlen(array);
+	dynamicText = new char[lenth + 1];
+	strcpy_s(dynamicText, lenth + 1 ,array);
 }
 
-Stringa::Stringa(const Stringa &str)
+Stringa::Stringa(const Stringa &strus)
 {
-	this->dynamicText = str.dynamicText;
+	lenth = strus.lenth;
+	dynamicText = new char[lenth + 1];
+	strcpy_s(dynamicText, lenth + 1,strus.dynamicText);
 }
 
-void Stringa::Show() const{
+void Stringa::Show() {
 	std::cout << dynamicText << std::endl;
 }
-size_t Stringa::getLength() const {
+size_t Stringa::getLength() {
 	return this->lenth;
 }

@@ -7,10 +7,9 @@ class Stringa
 	public:
 		Stringa();
 		Stringa(size_t lenth);
-		Stringa(char* array);
-		Stringa(char* array);
+		Stringa(const char* array);
 		Stringa(const Stringa &str);
-		void Show() const; 
-		size_t getLength() const;
+		void Show(); 
+		size_t getLength();
 };
 

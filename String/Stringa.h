@@ -9,7 +9,10 @@ class Stringa
 		Stringa(size_t lenth);
 		Stringa(const char* array);
 		Stringa(const Stringa &str);
+		Stringa(Stringa&& str);
+
 		void Show(); 
 		size_t getLength();
+		Stringa& operator=(Stringa&& str);
 };
 

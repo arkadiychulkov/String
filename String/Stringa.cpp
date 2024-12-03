@@ -27,9 +27,36 @@ Stringa::Stringa(const Stringa &strus)
 	strcpy_s(dynamicText, lenth + 1,strus.dynamicText);
 }
 
+Stringa::Stringa(Stringa&& str) :dynamicText(str.dynamicText), lenth(str.lenth) {
+	str.dynamicText = nullptr;
+	str.lenth = 0;
+}
+
+
+
+
+
+
+
+
+
+
 void Stringa::Show() {
 	std::cout << dynamicText << std::endl;
 }
+
 size_t Stringa::getLength() {
 	return this->lenth;
+}
+
+Stringa& Stringa::operator=(Stringa&& userStr) {
+	Stringa str(1);
+
+	str.dynamicText = userStr.dynamicText;
+	str.lenth = userStr.lenth;
+
+	userStr.dynamicText = nullptr;
+	userStr.lenth = 0;
+
+	return str;
 }

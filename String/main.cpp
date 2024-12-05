@@ -2,14 +2,19 @@
 #include <iostream>
 
 int main() {
-    Stringa usStr("Hi");
-    Stringa movestr = usStr;
+    Stringa str1("Hello");
+    Stringa str2(" World!");
 
-    std::cout << "Us: ";
-    usStr.Show();
+    Stringa str3 = str1 + str2;
+    str1 += str2;
 
-    std::cout << "Mov: ";
-    movestr.Show();
+    std::cout << "+ " << str3 << std::endl;
+    std::cout << "+= " << str1 << std::endl;
+    std::cout << "[1] " << str1[1] << std::endl;
+    std::cout << "== " << (str1 == str3) << std::endl;
+    std::cout << "!= " << (str1 != str2) << std::endl;
+    std::cout << "> " << (str1 > str2) << std::endl;
+    std::cout << "< " << (str1 < str3) << std::endl;
 
     return 0;
 }

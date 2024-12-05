@@ -50,7 +50,7 @@ size_t Stringa::getLength() {
 }
 
 Stringa& Stringa::operator=(Stringa&& userStr) {
-	Stringa str(1);
+	Stringa str;
 
 	str.dynamicText = userStr.dynamicText;
 	str.lenth = userStr.lenth;
@@ -59,4 +59,72 @@ Stringa& Stringa::operator=(Stringa&& userStr) {
 	userStr.lenth = 0;
 
 	return str;
+}
+
+Stringa& Stringa::operator=(const Stringa& str) {
+	Stringa strc;
+	strc.lenth = str.lenth;
+	strc.dynamicText = new char[lenth + 1];
+	strcpy_s(strc.dynamicText, lenth + 1, str.dynamicText);
+	return strc;
+}
+
+Stringa Stringa::operator+(const Stringa& str) {
+	size_t newLength = this->lenth + str.lenth;
+	char* newText = new char[newLength + 1];
+	strcpy_s(newText, this->lenth + 1, this->dynamicText);
+	strcat_s(newText, newLength + 1, str.dynamicText);
+
+	Stringa result(newText);
+	delete[] newText;
+	return result;
+}
+  
+Stringa& Stringa::operator+=(const Stringa& str) {
+	size_t newLength = this->lenth + str.lenth;
+	char* newText = new char[newLength + 1];
+	strcpy_s(newText, this->lenth + 1, this->dynamicText);
+	strcat_s(newText, newLength + 1, str.dynamicText);
+
+	delete[] this->dynamicText;
+	this->dynamicText = newText;
+	lenth = newLength;
+	return *this;
+}
+
+char& Stringa::operator[](size_t index) {
+	return this->dynamicText[index];
+}
+
+std::ostream& operator<<(std::ostream& os, const Stringa& str) {
+	os << str.dynamicText;
+	return os;
+}
+
+bool Stringa::operator==(const Stringa& str) {
+	for (size_t i = 0; i < this->lenth; i++)
+	{
+		if (this->dynamicText[i] != str.dynamicText[i]) {
+			return false;
+		}
+	}
+	return true;
+}
+
+bool Stringa::operator!=(const Stringa& str) {
+	for (size_t i = 0; i < this->lenth; i++)
+	{
+		if (this->dynamicText[i] != str.dynamicText[i]) {
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Stringa::operator>(const Stringa& str) {
+	return lenth > str.lenth;
+}
+
+bool Stringa::operator<(const Stringa& str) {
+	return lenth < str.lenth;
 }

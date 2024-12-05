@@ -1,4 +1,5 @@
 #pragma once
+#include<iostream>
 class Stringa
 {
 	private:
@@ -13,6 +14,14 @@ class Stringa
 
 		void Show(); 
 		size_t getLength();
+		Stringa& operator=(const Stringa& str);
 		Stringa& operator=(Stringa&& str);
+		Stringa operator+(const Stringa& str);
+		Stringa& operator+=(const Stringa& str);
+		char& operator[](size_t index);
+		friend std::ostream& operator<<(std::ostream& os, const Stringa& str);
+		bool operator==(const Stringa& str);
+		bool operator!=(const Stringa& str);
+		bool operator>(const Stringa& str);
+		bool operator<(const Stringa& str);
 };
-

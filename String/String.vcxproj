@@ -131,6 +131,7 @@
     <ClCompile Include="Stringa.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ISerializable.h" />
     <ClInclude Include="Stringa.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

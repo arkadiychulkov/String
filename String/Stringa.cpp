@@ -1,7 +1,9 @@
 #include "Stringa.h"
+#include "ISerializable.h"
 #include <stdexcept>
 #include<iostream>
 #include<cstring>
+#include<fstream>
 
 Stringa::Stringa() {
 	try
@@ -184,4 +186,76 @@ bool Stringa::operator>(const Stringa& str) {
 
 bool Stringa::operator<(const Stringa& str) {
 	return lenth < str.lenth;
+}
+
+
+std::ostream& Stringa::Serialize(std::ostream& output) {
+	output.write(reinterpret_cast<const char*>(&lenth), sizeof(lenth));
+	output.write(reinterpret_cast<const char*>(dynamicText), sizeof(char) * lenth);
+
+	return output;
+}
+
+std::istream& Stringa::Deserialize(std::istream& input) {
+	size_t newlenth;
+	input.read(reinterpret_cast<char*>(&newlenth), sizeof(newlenth));
+
+	char* arr = new char[newlenth+1];
+	input.read(reinterpret_cast<char*>(arr), newlenth);
+	arr[newlenth] = '\0';
+
+	dynamicText = arr;
+	lenth = newlenth;
+
+	return input;
+}
+
+std::ostream& Stringa::Serialize(std::string& Path) {
+	std::ofstream output(Path);
+	output.write(reinterpret_cast<const char*>(&lenth), sizeof(lenth));
+	output.write(reinterpret_cast<const char*>(dynamicText), sizeof(char) * lenth);
+
+	return output;
+}
+
+std::istream& Stringa::Deserialize(std::string& Path) {
+	std::ifstream input(Path);
+
+	size_t newlenth;
+	input.read(reinterpret_cast<char*>(&newlenth), sizeof(newlenth));
+
+	char* arr = new char[newlenth + 1];
+	input.read(reinterpret_cast<char*>(arr), newlenth);
+	arr[newlenth] = '\0';
+
+	dynamicText = arr;
+	lenth = newlenth;
+
+	return input;
+}
+
+std::ostream& Stringa::Serialize() {
+	std::ofstream output("output.txt");
+	output.write(reinterpret_cast<const char*>(&lenth), sizeof(lenth));
+	output.write(reinterpret_cast<const char*>(dynamicText), sizeof(char) * lenth);
+
+	output.close();
+	return output;
+}
+
+std::istream& Stringa::Deserialize() {
+	std::ifstream input("output.txt");
+
+	size_t newlenth;
+	input.read(reinterpret_cast<char*>(&newlenth), sizeof(newlenth));
+
+	char* arr = new char[newlenth + 1];
+	input.read(reinterpret_cast<char*>(arr), newlenth);
+	arr[newlenth] = '\0';
+
+	dynamicText = arr;
+	lenth = newlenth;
+
+	input.close();
+	return input;
 }

@@ -1,22 +1,23 @@
 #include "Stringa.h"
 #include <iostream>
+#include <fstream>
 
 int main() {
 	try
 	{
         Stringa str1("Hello");
-        Stringa str2(" World!");
+        Stringa str3("");
 
-        Stringa str3 = str1 + str2;
-        str1 += str2;
+        /*std::ofstream file("output.txt");
+        std::string fname = "output.txt";*/
+        str1.Serialize();
+        //file.close();
 
-        std::cout << "+ " << str3 << std::endl;
-        std::cout << "+= " << str1 << std::endl;
-        std::cout << "[1] " << str1[1] << std::endl;
-        std::cout << "== " << (str1 == str3) << std::endl;
-        std::cout << "!= " << (str1 != str2) << std::endl;
-        std::cout << "> " << (str1 > str2) << std::endl;
-        std::cout << "< " << (str1 < str3) << std::endl;
+        //std::ifstream inFile("output.txt");
+        str3.Deserialize();
+        //inFile.close();
+
+        std::cout << str3;
 
         return 0;
 	}

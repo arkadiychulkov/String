@@ -1,6 +1,8 @@
 #pragma once
 #include<iostream>
-class Stringa
+#include"ISerializable.h"
+
+class Stringa : ISerializable
 {
 	private:
 		size_t lenth;
@@ -24,4 +26,13 @@ class Stringa
 		bool operator!=(const Stringa& str);
 		bool operator>(const Stringa& str);
 		bool operator<(const Stringa& str);
+
+		std::ostream& Serialize(std::ostream& output);
+		std::istream& Deserialize(std::istream& input);
+
+		std::ostream& Serialize(std::string& Path);
+		std::istream& Deserialize(std::string& Path);
+
+		std::ostream& Serialize();
+		std::istream& Deserialize();
 };
